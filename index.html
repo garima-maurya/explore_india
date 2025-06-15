@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Explore India - Travel Page</title>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f0f8ff;
+    }
+
+    header {
+      background: linear-gradient(to right, #faa1b3, #ff99ac);
+     color: white;
+      padding: 20px;
+      text-align: center;
+    }
+   header h1{
+      font-size: 40px;
+    }
+    header p{
+      font-size:25px;
+    }
+    
+.navbar {
+  display: flex;
+  flex-direction: column; /* for vertical stacking */
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #e3aeec; /* soft purple */
+position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+
+.navbar .logo {
+  margin-bottom: 10px;
+  font-size: 22px;
+  color: white;
+  font-weight: bold;
+}
+
+
+.navbar .nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.navbar .nav-links li a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.menu-icon {
+  display: none;
+  font-size: 32px;
+  color: white;
+  cursor: pointer;
+}
+
+/* Mobile Responsive */
+#menu-toggle {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .navbar .nav-links {
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 100%;
+    background-color: #005b99;
+    display: none;
+  }
+
+  .navbar .nav-links li {
+    text-align: center;
+    padding: 10px 0;
+  }
+
+  #menu-toggle:checked + .menu-icon + .nav-links {
+    display: flex;
+  }
+
+  .menu-icon {
+    display: block;
+  }
+}
+.navbar .nav-links li a:hover {
+  color: #0a708f;
+  cursor: pointer;
+}
+
+
+
+    .hero {
+      background-image: url('banner.jpg'); /* Replace with real image */
+      background-size: cover;
+      background-position: center;
+      color: rgb(245, 105, 105);
+      text-align: center;
+      padding: 100px 20px;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 10px;
+    }
+    .hero p{
+      color:rgb(102, 28, 28) ;
+    }
+
+    .destinations {
+      padding: 30px;
+      text-align: center;
+    }
+
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  width: 250px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+
+    .card img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  transition: transform 0.4s ease; /* smooth animation */
+}
+
+.card:hover img {
+  transform: scale(1.1); /* 10% zoom */
+}
+
+
+    .card-content {
+      padding: 15px;
+    }
+
+    .card-content h3 {
+      margin: 0;
+      font-size: 20px;
+      color: #333;
+    }
+
+    .card-content p {
+      font-size: 14px;
+      color: #666;
+      margin: 10px 0;
+    }
+
+    .card-content button {
+      background-color: #007acc;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .reviews {
+  background-color: #fff7f7;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.reviews h2 {
+  color: #004466;
+  margin-bottom: 30px;
+}
+
+.review-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.review-card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  max-width: 300px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.review-card p {
+  font-style: italic;
+  color: #333;
+}
+
+.review-card h4 {
+  text-align: right;
+  margin-top: 15px;
+  color: #007acc;
+}
+.contact {
+  background-color: #ffffff;
+  padding: 50px 20px;
+  text-align: center;
+  box-shadow: 0 0 8px rgba(0,0,0,0.05);
+  max-width: 600px;
+  margin: 40px auto;
+  border-radius: 10px;
+}
+
+.contact h2 {
+  color: #004466;
+  margin-bottom: 10px;
+  font-size: 24px;
+}
+
+.contact p {
+  color: #555;
+  font-size: 16px;
+  margin-bottom: 30px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 0 20px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: #f6faff;
+  transition: border 0.3s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #007acc;
+  outline: none;
+}
+
+.contact-form button {
+  background-color: #007acc;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.contact-form button:hover {
+  background-color: #005b99;
+}
+
+
+footer {
+      background-color: #f4f4f4;
+      text-align: center;
+      padding: 15px;
+      margin-top: 40px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <header id="home">
+    <h1>🌏 Explore India</h1>
+    <p>Discover the beauty, culture, and colors of India</p>
+  </header>
+
+  <nav class="navbar">
+  <div class="logo">Explore India</div>
+
+  <input type="checkbox" id="menu-toggle">
+  <label for="menu-toggle" class="menu-icon">&#9776;</label>
+
+  <ul class="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#destinations">Destinations</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+  <section class="hero">
+    <h1>Journey Through Incredible India 🇮🇳</h1>
+    <p>Mountains, Beaches, Culture & Heritage — all in one country</p>
+  </section>
+
+  <section class="destinations" id="destinations">
+    <h2>Top Destinations</h2>
+    <div class="card-container">
+
+      <div class="card">
+        <img src="ladakh.jpg" alt="Leh Ladakh">
+        <div class="card-content">
+          <h3>Leh-Ladakh</h3>
+          <p>High passes, stunning valleys & peaceful monasteries.</p>
+          <button>View More</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="jaipur.jpg" alt="Jaipur">
+        <div class="card-content">
+          <h3>Jaipur</h3>
+          <p>Royal palaces and vibrant Rajasthani culture.</p>
+          <button>View More</button>
+        </div>
+      </div>
+<div class="card">
+  <img src="goa.jpg" alt="Goa">
+  <div class="card-content">
+    <h3>Goa</h3>
+    <p>Golden beaches, fun nightlife & Portuguese charm.</p>
+    <button>View More</button>
+  </div>
+</div>
+
+<div class="card">
+  <img src="kerala.jpg" alt="Kerala">
+  <div class="card-content">
+    <h3>Kerala</h3>
+    <p>Peaceful backwaters, houseboats & lush greenery.</p>
+    <button>View More</button>
+  </div>
+</div>
+
+<div class="card">
+  <img src="agra.jpg" alt="Agra">
+  <div class="card-content">
+    <h3>Agra</h3>
+    <p>Home to the iconic Taj Mahal — a symbol of love.</p>
+    <button>View More</button>
+  </div>
+</div>
+
+<div class="card">
+  <img src="rishikesh.jpg" alt="Rishikesh">
+  <div class="card-content">
+    <h3>Rishikesh</h3>
+    <p>Yoga capital & thrilling white-water rafting spot.</p>
+    <button>View More</button>
+  </div>
+</div>
+<div class="card">
+  <img src="shimla.jpg" alt="Shimla">
+  <div class="card-content">
+    <h3>Shimla</h3>
+    <p>Snowy hills, Mall Road & British architecture charm.</p>
+    <button>View More</button>
+  </div>
+</div>
+<div class="card">
+  <img src="varanasi.jpg" alt="Varanasi">
+  <div class="card-content">
+    <h3>Varanasi</h3>
+    <p>Ancient city on the Ganges — full of traditions & temples.</p>
+    <button>View More</button>
+  </div>
+</div>
+<div class="card">
+  <img src="udaipur.jpg" alt="Udaipur">
+  <div class="card-content">
+    <h3>Udaipur</h3>
+    <p>Known as the City of Lakes with royal architecture.</p>
+    <button>View More</button>
+  </div>
+</div>
+<div class="card">
+  <img src="khajuraho.jpg" alt="Khajuraho">
+  <div class="card-content">
+    <h3>Khajuraho</h3>
+    <p>Famous for stunning sculptures & intricate carvings.</p>
+    <button>View More</button>
+  </div>
+</div>
+<div class="card">
+  <img src="mysuru.jpg" alt="Mysuru">
+  <div class="card-content">
+    <h3>Mysuru</h3>
+    <p>Home of Mysore Palace, yoga, and heritage markets.</p>
+    <button>View More</button>
+  </div>
+</div>
+<div class="card">
+  <img src="andaman.jpg" alt="Andaman Islands">
+  <div class="card-content">
+    <h3>Andaman Islands</h3>
+    <p>White sand beaches, coral reefs & peaceful escape.</p>
+    <button>View More</button>
+  </div>
+</div>
+
+      <!-- Add more cards here -->
+
+    </div>
+  </section>
+<section class="reviews" id="testimonials">
+  <h2>🗣️ What Travelers Say</h2>
+  <div class="review-container">
+
+    <div class="review-card">
+      <p>"India’s beauty amazed me! The diversity in places like Kerala and Jaipur was stunning. Will definitely visit again!"</p>
+      <h4>— Sarah (UK)</h4>
+    </div>
+
+    <div class="review-card">
+      <p>"Leh-Ladakh was a spiritual and adventurous experience. Thanks to Explore India for such great suggestions!"</p>
+      <h4>— Aman (India)</h4>
+    </div>
+
+    <div class="review-card">
+      <p>"I explored Varanasi and Rishikesh. The culture and peace were unforgettable. Highly recommended!"</p>
+      <h4>— Elena (Spain)</h4>
+    </div>
+
+  </div>
+</section>
+<section class="contact" id="contact">
+  <h2>📬 Contact Us</h2>
+  <p>Have any questions or feedback? We'd love to hear from you!</p>
+
+  <form class="contact-form" action="#">
+    <input type="text" placeholder="Your Name" required>
+    <input type="email" placeholder="Your Email" required>
+    <textarea rows="4" placeholder="Your Message..." required></textarea>
+    <button type="submit">Send Message</button>
+  </form>
+</section>
+
+  <footer id="contact">
+    <p>© 2024 Explore India | Created by Garima Maurya</p>
+  </footer>
+
+</body>
+</html>
