@@ -1,467 +1,407 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Explore India - Travel Page</title>
-  <style>
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background-color: #f0f8ff;
-    }
-
-    header {
-      background: linear-gradient(to right, #faa1b3, #ff99ac);
-     color: white;
-      padding: 20px;
-      text-align: center;
-    }
-   header h1{
-      font-size: 40px;
-    }
-    header p{
-      font-size:25px;
-    }
-    
-.navbar {
-  display: flex;
-  flex-direction: column; /* for vertical stacking */
-  align-items: center;
-  padding: 10px 20px;
-  background-color: #e3aeec; /* soft purple */
-position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
-
-.navbar .logo {
-  margin-bottom: 10px;
-  font-size: 22px;
-  color: white;
-  font-weight: bold;
-}
-
-
-.navbar .nav-links {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-}
-
-.navbar .nav-links li a {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.menu-icon {
-  display: none;
-  font-size: 32px;
-  color: white;
-  cursor: pointer;
-}
-
-/* Mobile Responsive */
-#menu-toggle {
-  display: none;
-}
-
-@media (max-width: 768px) {
-  .navbar .nav-links {
-    flex-direction: column;
-    position: absolute;
-    top: 60px;
-    right: 0;
-    width: 100%;
-    background-color: #005b99;
-    display: none;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Explore India</title>
+<style>
+  :root {
+    --primary: #ff7fa6;
+    --primary-dark: #e85d87;
+    --accent: #007acc;
+    --accent-dark: #005b99;
   }
 
-  .navbar .nav-links li {
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f0f8ff;
+  }
+
+  header {
+    background: linear-gradient(to right, var(--primary), var(--primary-dark));
+    color: white;
+    padding: 24px 20px;
     text-align: center;
-    padding: 10px 0;
   }
+  header h1 { font-size: clamp(28px, 5vw, 40px); }
+  header p  { font-size: clamp(16px, 2.5vw, 25px); }
 
-  #menu-toggle:checked + .menu-icon + .nav-links {
+  /* Navbar */
+  .navbar {
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: var(--primary-dark);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  .navbar .logo { margin-bottom: 10px; font-size: 22px; color: white; font-weight: bold; }
+  .navbar .nav-links { list-style: none; display: flex; gap: 20px; margin: 0; padding: 0; }
+  .navbar .nav-links li a { color: white; text-decoration: none; font-weight: bold; transition: color 0.2s ease; }
+  .navbar .nav-links li a:hover { color: #ffe1eb; cursor: pointer; }
+  .menu-icon { display: none; font-size: 32px; color: white; cursor: pointer; }
+  #menu-toggle { display: none; }
+
+  @media (max-width: 768px) {
+    .navbar .nav-links {
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background-color: var(--primary-dark);
+      display: none;
+    }
+    .navbar .nav-links li { text-align: center; padding: 10px 0; }
+    #menu-toggle:checked + .menu-icon + .nav-links { display: flex; }
+    .menu-icon { display: block; }
   }
 
-  .menu-icon {
-    display: block;
+  /* Hero */
+  .hero {
+    position: relative;
+    background-image: url('banner.jpg');
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    padding: 100px 20px;
   }
-}
-.navbar .nav-links li a:hover {
-  color: #0a708f;
-  cursor: pointer;
-}
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+  }
+  .hero h1, .hero p { position: relative; z-index: 1; color: #fff; }
+  .hero h1 { font-size: clamp(28px, 6vw, 48px); margin-bottom: 10px; }
+  .hero p  { font-size: clamp(15px, 2.5vw, 20px); }
 
+  /* Destinations grid */
+  .destinations { padding: 30px; text-align: center; }
+  .card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .card:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
+  .card img { width: 100%; height: 160px; object-fit: cover; transition: transform 0.4s ease; }
+  .card:hover img { transform: scale(1.1); }
+  .card-content { padding: 15px; text-align: left; }
+  .card-content h3 { margin: 0; font-size: 20px; color: #333; }
+  .card-content p { font-size: 14px; color: #666; margin: 10px 0; }
+  .card-content button {
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  .card-content button:hover { background-color: var(--accent-dark); }
 
+  /* Reviews */
+  .reviews { background-color: #fff7f7; padding: 40px 20px; text-align: center; }
+  .reviews h2 { color: #004466; margin-bottom: 30px; }
+  .review-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .review-card {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    text-align: left;
+  }
+  .review-card p { font-style: italic; color: #333; }
+  .review-card h4 { text-align: right; margin-top: 15px; color: var(--accent); }
 
-    .hero {
-      background-image: url('banner.jpg'); /* Replace with real image */
-      background-size: cover;
-      background-position: center;
-      color: rgb(245, 105, 105);
-      text-align: center;
-      padding: 100px 20px;
-    }
+  /* Contact */
+  .contact {
+    background-color: #ffffff;
+    padding: 50px 20px;
+    text-align: center;
+    box-shadow: 0 0 8px rgba(0,0,0,0.05);
+    max-width: 600px;
+    margin: 40px auto;
+    border-radius: 10px;
+  }
+  .contact h2 { color: #004466; margin-bottom: 10px; font-size: 24px; }
+  .contact p { color: #555; font-size: 16px; margin-bottom: 30px; }
+  .contact-form { display: flex; flex-direction: column; gap: 15px; padding: 0 20px; }
+  .contact-form input,
+  .contact-form textarea {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    background-color: #f6faff;
+    font-family: inherit;
+    transition: border 0.3s ease;
+  }
+  .contact-form input:focus,
+  .contact-form textarea:focus { border-color: var(--accent); outline: none; }
+  .contact-form button {
+    background-color: var(--accent);
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  .contact-form button:hover { background-color: var(--accent-dark); }
 
-    .hero h1 {
-      font-size: 48px;
-      margin-bottom: 10px;
-    }
-    .hero p{
-      color:rgb(102, 28, 28) ;
-    }
+  footer {
+    background-color: #f4f4f4;
+    text-align: center;
+    padding: 15px;
+    margin-top: 40px;
+    color: #555;
+  }
 
-    .destinations {
-      padding: 30px;
-      text-align: center;
-    }
+  @media (max-width: 480px) {
+    .hero { padding: 70px 16px; }
+    .card-content h3 { font-size: 18px; }
+  }
 
-    .card-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-    }
+  /* ---------- Modal / Lightbox ---------- */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease;
+    z-index: 2000;
+  }
+  .modal-overlay.active { opacity: 1; visibility: visible; }
 
-    .card {
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  width: 250px;
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+  .modal-box {
+    background: #fff;
+    border-radius: 14px;
+    max-width: 500px;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+    position: relative;
+    transform: translateY(20px) scale(0.97);
+    transition: transform 0.25s ease;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  }
+  .modal-overlay.active .modal-box { transform: translateY(0) scale(1); }
 
-.card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
+  .modal-box img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 14px 14px 0 0;
+  }
+  .modal-content { padding: 20px 24px 26px; }
+  .modal-content h3 { color: #333; font-size: 22px; margin-bottom: 10px; }
+  .modal-content p { color: #666; font-size: 15px; line-height: 1.6; }
 
+  .modal-close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 34px;
+    height: 34px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.55);
+    color: #fff;
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+  }
+  .modal-close:hover { background: rgba(0,0,0,0.8); }
 
-    .card img {
-  width: 100%;
-  height: 160px;
-  object-fit: cover;
-  transition: transform 0.4s ease; /* smooth animation */
-}
-
-.card:hover img {
-  transform: scale(1.1); /* 10% zoom */
-}
-
-
-    .card-content {
-      padding: 15px;
-    }
-
-    .card-content h3 {
-      margin: 0;
-      font-size: 20px;
-      color: #333;
-    }
-
-    .card-content p {
-      font-size: 14px;
-      color: #666;
-      margin: 10px 0;
-    }
-
-    .card-content button {
-      background-color: #007acc;
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .reviews {
-  background-color: #fff7f7;
-  padding: 40px 20px;
-  text-align: center;
-}
-
-.reviews h2 {
-  color: #004466;
-  margin-bottom: 30px;
-}
-
-.review-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-}
-
-.review-card {
-  background-color: white;
-  border-radius: 10px;
-  padding: 20px;
-  max-width: 300px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  text-align: left;
-}
-
-.review-card p {
-  font-style: italic;
-  color: #333;
-}
-
-.review-card h4 {
-  text-align: right;
-  margin-top: 15px;
-  color: #007acc;
-}
-.contact {
-  background-color: #ffffff;
-  padding: 50px 20px;
-  text-align: center;
-  box-shadow: 0 0 8px rgba(0,0,0,0.05);
-  max-width: 600px;
-  margin: 40px auto;
-  border-radius: 10px;
-}
-
-.contact h2 {
-  color: #004466;
-  margin-bottom: 10px;
-  font-size: 24px;
-}
-
-.contact p {
-  color: #555;
-  font-size: 16px;
-  margin-bottom: 30px;
-}
-
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  padding: 0 20px;
-}
-
-.contact-form input,
-.contact-form textarea {
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 16px;
-  background-color: #f6faff;
-  transition: border 0.3s ease;
-}
-
-.contact-form input:focus,
-.contact-form textarea:focus {
-  border-color: #007acc;
-  outline: none;
-}
-
-.contact-form button {
-  background-color: #007acc;
-  color: white;
-  padding: 12px;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.contact-form button:hover {
-  background-color: #005b99;
-}
-
-
-footer {
-      background-color: #f4f4f4;
-      text-align: center;
-      padding: 15px;
-      margin-top: 40px;
-    }
-
-  </style>
+  @media (max-width: 480px) {
+    .modal-box img { height: 180px; }
+    .modal-content { padding: 16px 18px 22px; }
+  }
+</style>
 </head>
 <body>
 
-  <header id="home">
-    <h1>🌏 Explore India</h1>
-    <p>Discover the beauty, culture, and colors of India</p>
-  </header>
+<header>
+  <h1>Explore India</h1>
+  <p>Discover the beauty, culture, and adventure across India</p>
+</header>
 
-  <nav class="navbar">
-  <div class="logo">Explore India</div>
-
+<nav class="navbar">
+  <div class="logo">🇮🇳 Explore India</div>
   <input type="checkbox" id="menu-toggle">
-  <label for="menu-toggle" class="menu-icon">&#9776;</label>
-
+  <label for="menu-toggle" class="menu-icon">☰</label>
   <ul class="nav-links">
     <li><a href="#home">Home</a></li>
     <li><a href="#destinations">Destinations</a></li>
-    <li><a href="#testimonials">Reviews</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
 
-  <section class="hero">
-    <h1>Journey Through Incredible India 🇮🇳</h1>
-    <p>Mountains, Beaches, Culture & Heritage — all in one country</p>
-  </section>
+<section class="hero" id="home">
+  <h1>Incredible India Awaits</h1>
+  <p>From the Himalayas to the beaches of Goa — find your next journey.</p>
+</section>
 
-  <section class="destinations" id="destinations">
-    <h2>Top Destinations</h2>
-    <div class="card-container">
+<section class="destinations" id="destinations">
+  <h2>Popular Destinations</h2>
+  <div class="card-container">
 
-      <div class="card">
-        <img src="ladakh.jpg" alt="Leh Ladakh">
-        <div class="card-content">
-          <h3>Leh-Ladakh</h3>
-          <p>High passes, stunning valleys & peaceful monasteries.</p>
-          <button>View More</button>
-        </div>
+    <div class="card">
+      <img src="ladakh.jpg" alt="Leh Ladakh" loading="lazy">
+      <div class="card-content">
+        <h3>Leh Ladakh</h3>
+        <p>Snow-capped mountains and serene monasteries.</p>
+        <button
+          data-title="Leh Ladakh"
+          data-img="ladakh.jpg"
+          data-desc="Leh Ladakh is a high-altitude desert region in the Himalayas, famous for its Buddhist monasteries, crystal-clear lakes like Pangong Tso, and breathtaking mountain passes. Best visited between May and September, it's a haven for bikers, trekkers, and anyone seeking stark, otherworldly landscapes.">
+          View More
+        </button>
       </div>
+    </div>
 
-      <div class="card">
-        <img src="jaipur.jpg" alt="Jaipur">
-        <div class="card-content">
-          <h3>Jaipur</h3>
-          <p>Royal palaces and vibrant Rajasthani culture.</p>
-          <button>View More</button>
-        </div>
+    <div class="card">
+      <img src="kerala.jpg" alt="Kerala Backwaters" loading="lazy">
+      <div class="card-content">
+        <h3>Kerala Backwaters</h3>
+        <p>Tranquil houseboats winding through palm-lined canals.</p>
+        <button
+          data-title="Kerala Backwaters"
+          data-img="kerala.jpg"
+          data-desc="Known as 'God's Own Country,' Kerala's backwaters are a network of lagoons and canals best explored aboard a traditional houseboat. Expect lush greenery, fresh seafood, Ayurvedic wellness retreats, and a slower pace of life along the water.">
+          View More
+        </button>
       </div>
-<div class="card">
-  <img src="goa.jpg" alt="Goa">
-  <div class="card-content">
-    <h3>Goa</h3>
-    <p>Golden beaches, fun nightlife & Portuguese charm.</p>
-    <button>View More</button>
-  </div>
-</div>
-
-<div class="card">
-  <img src="kerala.jpg" alt="Kerala">
-  <div class="card-content">
-    <h3>Kerala</h3>
-    <p>Peaceful backwaters, houseboats & lush greenery.</p>
-    <button>View More</button>
-  </div>
-</div>
-
-<div class="card">
-  <img src="agra.jpg" alt="Agra">
-  <div class="card-content">
-    <h3>Agra</h3>
-    <p>Home to the iconic Taj Mahal — a symbol of love.</p>
-    <button>View More</button>
-  </div>
-</div>
-
-<div class="card">
-  <img src="rishikesh.jpg" alt="Rishikesh">
-  <div class="card-content">
-    <h3>Rishikesh</h3>
-    <p>Yoga capital & thrilling white-water rafting spot.</p>
-    <button>View More</button>
-  </div>
-</div>
-<div class="card">
-  <img src="shimla.jpg" alt="Shimla">
-  <div class="card-content">
-    <h3>Shimla</h3>
-    <p>Snowy hills, Mall Road & British architecture charm.</p>
-    <button>View More</button>
-  </div>
-</div>
-<div class="card">
-  <img src="varanasi.jpg" alt="Varanasi">
-  <div class="card-content">
-    <h3>Varanasi</h3>
-    <p>Ancient city on the Ganges — full of traditions & temples.</p>
-    <button>View More</button>
-  </div>
-</div>
-<div class="card">
-  <img src="udaipur.jpg" alt="Udaipur">
-  <div class="card-content">
-    <h3>Udaipur</h3>
-    <p>Known as the City of Lakes with royal architecture.</p>
-    <button>View More</button>
-  </div>
-</div>
-<div class="card">
-  <img src="khajuraho.jpg" alt="Khajuraho">
-  <div class="card-content">
-    <h3>Khajuraho</h3>
-    <p>Famous for stunning sculptures & intricate carvings.</p>
-    <button>View More</button>
-  </div>
-</div>
-<div class="card">
-  <img src="mysuru.jpg" alt="Mysuru">
-  <div class="card-content">
-    <h3>Mysuru</h3>
-    <p>Home of Mysore Palace, yoga, and heritage markets.</p>
-    <button>View More</button>
-  </div>
-</div>
-<div class="card">
-  <img src="andaman.jpg" alt="Andaman Islands">
-  <div class="card-content">
-    <h3>Andaman Islands</h3>
-    <p>White sand beaches, coral reefs & peaceful escape.</p>
-    <button>View More</button>
-  </div>
-</div>
-
-      <!-- Add more cards here -->
-
-    </div>
-  </section>
-<section class="reviews" id="testimonials">
-  <h2>🗣️ What Travelers Say</h2>
-  <div class="review-container">
-
-    <div class="review-card">
-      <p>"India’s beauty amazed me! The diversity in places like Kerala and Jaipur was stunning. Will definitely visit again!"</p>
-      <h4>— Sarah (UK)</h4>
     </div>
 
-    <div class="review-card">
-      <p>"Leh-Ladakh was a spiritual and adventurous experience. Thanks to Explore India for such great suggestions!"</p>
-      <h4>— Aman (India)</h4>
+    <div class="card">
+      <img src="jaipur.jpg" alt="Jaipur, the Pink City" loading="lazy">
+      <div class="card-content">
+        <h3>Jaipur</h3>
+        <p>The Pink City's forts, palaces, and vibrant bazaars.</p>
+        <button
+          data-title="Jaipur — The Pink City"
+          data-img="jaipur.jpg"
+          data-desc="Jaipur is Rajasthan's capital, renowned for its rose-hued architecture, the Amber Fort, City Palace, and bustling markets selling textiles and jewelry. It's part of India's Golden Triangle and a must for anyone interested in royal Indian history.">
+          View More
+        </button>
+      </div>
     </div>
 
-    <div class="review-card">
-      <p>"I explored Varanasi and Rishikesh. The culture and peace were unforgettable. Highly recommended!"</p>
-      <h4>— Elena (Spain)</h4>
-    </div>
+    <!--
+      Add your remaining cards below using this exact pattern.
+      Only data-title, data-img, and data-desc need to change per card —
+      the modal JS reads these automatically.
+    -->
 
   </div>
 </section>
-<section class="contact" id="contact">
-  <h2>📬 Contact Us</h2>
-  <p>Have any questions or feedback? We'd love to hear from you!</p>
 
-  <form class="contact-form" action="#">
+<section class="reviews">
+  <h2>What Travelers Say</h2>
+  <div class="review-container">
+    <div class="review-card">
+      <p>"An unforgettable trip through the mountains — planning made so easy!"</p>
+      <h4>— Aisha K.</h4>
+    </div>
+    <div class="review-card">
+      <p>"The backwaters of Kerala were pure magic. Highly recommend."</p>
+      <h4>— Rohan M.</h4>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <h2>Get in Touch</h2>
+  <p>Have questions about planning your trip? Reach out below.</p>
+  <form class="contact-form">
     <input type="text" placeholder="Your Name" required>
     <input type="email" placeholder="Your Email" required>
-    <textarea rows="4" placeholder="Your Message..." required></textarea>
+    <textarea rows="4" placeholder="Your Message" required></textarea>
     <button type="submit">Send Message</button>
   </form>
 </section>
 
-  <footer id="contact">
-    <p>© 2024 Explore India | Created by Garima Maurya</p>
-  </footer>
+<footer id="site-footer">
+  <p>© 2024 Explore India | Created by Garima Maurya</p>
+</footer>
+
+<!-- Modal markup -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-box">
+    <button class="modal-close" id="modalClose">&times;</button>
+    <img id="modalImg" src="" alt="">
+    <div class="modal-content">
+      <h3 id="modalTitle"></h3>
+      <p id="modalDesc"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+  const overlay = document.getElementById('modalOverlay');
+  const modalImg = document.getElementById('modalImg');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalDesc = document.getElementById('modalDesc');
+  const closeBtn = document.getElementById('modalClose');
+
+  document.querySelectorAll('.card-content button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      modalImg.src = btn.dataset.img || '';
+      modalImg.alt = btn.dataset.title || '';
+      modalTitle.textContent = btn.dataset.title || '';
+      modalDesc.textContent = btn.dataset.desc || '';
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  function closeModal() {
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeModal();
+  });
+</script>
 
 </body>
 </html>
